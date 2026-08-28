@@ -1,0 +1,337 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --win95-face: #c0c0c0;
+  --win95-light: #ffffff;
+  --win95-dark: #808080;
+  --win95-darker: #404040;
+  --win95-blue: #000080;
+  --win95-blue2: #1084d0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: 'VT323', 'PingFang SC', 'Microsoft YaHei', monospace;
+  font-size: 17px;
+  overflow: hidden;
+  user-select: none;
+  -webkit-font-smoothing: none;
+}
+
+.pixel {
+  font-family: 'Press Start 2P', 'PingFang SC', 'Microsoft YaHei', monospace;
+}
+
+/* ===== 桌面 ===== */
+.desktop {
+  background: #008080;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.02) 0 1px, transparent 1px 3px);
+}
+
+/* CRT 扫描线（轻微） */
+.scanlines::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.06) 0 1px, transparent 1px 3px);
+  z-index: 9999;
+}
+
+/* ===== 桌面图标 ===== */
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 84px;
+  padding: 6px 2px;
+  cursor: pointer;
+}
+.desktop-icon .ico {
+  font-size: 34px;
+  line-height: 1;
+  filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.4));
+}
+.desktop-icon .lbl {
+  color: #fff;
+  font-size: 15px;
+  text-align: center;
+  text-shadow: 1px 1px 1px #000;
+  line-height: 1.1;
+}
+.desktop-icon.selected .lbl {
+  background: #000080;
+  outline: 1px dotted #ffff00;
+}
+
+/* ===== Win95 窗口 ===== */
+.win95-window {
+  background: var(--win95-face);
+  border: 2px solid;
+  border-color: var(--win95-light) var(--win95-darker) var(--win95-darker) var(--win95-light);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+}
+.win95-window.inactive .win95-titlebar {
+  background: linear-gradient(90deg, #7f7f7f, #b0b0b0);
+}
+
+.win95-titlebar {
+  background: linear-gradient(90deg, var(--win95-blue), var(--win95-blue2));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px 3px 3px 6px;
+  cursor: default;
+  flex-shrink: 0;
+  font-size: 15px;
+}
+
+.win95-close {
+  width: 18px;
+  height: 18px;
+  background: var(--win95-face);
+  border: 2px solid;
+  border-color: var(--win95-light) var(--win95-darker) var(--win95-darker) var(--win95-light);
+  font-size: 11px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  cursor: pointer;
+}
+.win95-close:active {
+  border-color: var(--win95-darker) var(--win95-light) var(--win95-light) var(--win95-darker);
+}
+
+.win95-body {
+  padding: 10px;
+  overflow: auto;
+  flex: 1;
+  color: #000;
+}
+
+/* ===== Win95 控件 ===== */
+.btn95 {
+  background: var(--win95-face);
+  border: 2px solid;
+  border-color: var(--win95-light) var(--win95-darker) var(--win95-darker) var(--win95-light);
+  padding: 3px 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 16px;
+}
+.btn95:active {
+  border-color: var(--win95-darker) var(--win95-light) var(--win95-light) var(--win95-darker);
+}
+.btn95:disabled {
+  color: var(--win95-dark);
+  text-shadow: 1px 1px 0 #fff;
+  cursor: default;
+}
+
+.field95 {
+  background: #fff;
+  border: 2px solid;
+  border-color: var(--win95-darker) var(--win95-light) var(--win95-light) var(--win95-darker);
+  padding: 3px 6px;
+  font-family: inherit;
+  font-size: 16px;
+  width: 100%;
+  color: #000;
+}
+.field95:focus {
+  outline: none;
+}
+
+/* ===== 任务栏 ===== */
+.taskbar {
+  background: var(--win95-face);
+  border-top: 2px solid var(--win95-light);
+  box-shadow: inset 0 1px 0 var(--win95-light);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 4px;
+}
+
+.start-btn {
+  background: var(--win95-face);
+  border: 2px solid;
+  border-color: var(--win95-light) var(--win95-darker) var(--win95-darker) var(--win95-light);
+  padding: 2px 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 16px;
+}
+.start-btn:active {
+  border-color: var(--win95-darker) var(--win95-light) var(--win95-light) var(--win95-darker);
+}
+
+.tb-task {
+  flex: 1;
+  min-width: 0;
+  background: var(--win95-face);
+  border: 2px solid;
+  border-color: var(--win95-darker) var(--win95-light) var(--win95-light) var(--win95-darker);
+  padding: 2px 8px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== Landing 页 ===== */
+.landing {
+  height: 100%;
+  background: #0a0a12;
+  color: #e8e8f0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.landing-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(120, 80, 255, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 80, 255, 0.12) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 78%);
+  animation: landing-grid-pan 18s linear infinite;
+}
+@keyframes landing-grid-pan {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 44px 44px, 44px 44px; }
+}
+.landing-inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 24px;
+  max-width: 760px;
+}
+.landing-badge {
+  display: inline-block;
+  font-family: 'Press Start 2P', 'PingFang SC', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #a78bfa;
+  border: 1px solid rgba(167, 139, 250, 0.5);
+  padding: 8px 14px;
+  margin-bottom: 28px;
+  background: rgba(167, 139, 250, 0.08);
+}
+.landing-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(40px, 8vw, 84px);
+  line-height: 1.05;
+  color: #fff;
+  margin: 0 0 22px;
+  text-shadow: 0 0 30px rgba(167, 139, 250, 0.65), 0 0 80px rgba(167, 139, 250, 0.35);
+}
+.landing-title-accent {
+  color: #a78bfa;
+}
+.landing-sub {
+  font-size: 20px;
+  line-height: 1.7;
+  color: #b9b9cc;
+  margin: 0 0 40px;
+}
+.landing-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  margin-bottom: 44px;
+}
+.landing-feature {
+  flex: 1 1 200px;
+  max-width: 240px;
+  display: flex;
+  gap: 12px;
+  text-align: left;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+}
+.landing-feature-icon {
+  font-size: 26px;
+  line-height: 1;
+}
+.landing-feature-title {
+  font-weight: bold;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.landing-feature-desc {
+  font-size: 14px;
+  color: #9a9ab0;
+  line-height: 1.5;
+}
+.landing-cta {
+  font-family: 'Press Start 2P', 'PingFang SC', monospace;
+  font-size: 16px;
+  color: #0a0a12;
+  background: linear-gradient(180deg, #c4b5fd, #a78bfa);
+  border: none;
+  padding: 18px 40px;
+  cursor: pointer;
+  box-shadow: 0 0 24px rgba(167, 139, 250, 0.55), inset 0 -3px 0 rgba(0, 0, 0, 0.25);
+  transition: transform 0.08s ease;
+}
+.landing-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(167, 139, 250, 0.85), inset 0 -3px 0 rgba(0, 0, 0, 0.25);
+}
+.landing-cta:active {
+  transform: translateY(1px);
+}
+.landing-cta-blink {
+  animation: landing-blink 1s steps(2) infinite;
+}
+@keyframes landing-blink {
+  50% { opacity: 0; }
+}
+.landing-foot {
+  margin-top: 26px;
+  font-size: 13px;
+  color: #5c5c70;
+}
+
+/* ===== BIOS 开机屏 ===== */
+.bios {
+  background: #000;
+  color: #c0c0c0;
+  font-family: 'VT323', monospace;
+  height: 100%;
+  padding: 32px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.bios .brand {
+  font-family: 'Press Start 2P', monospace;
+  color: #0f0;
+}

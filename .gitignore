@@ -1,0 +1,33 @@
+# 依赖与虚拟环境
+.venv/
+venv/
+node_modules/
+ace-step/.venv/
+
+# 密钥
+.env
+backend/.env
+
+# 数据与产物
+data/
+backend/data/
+*.db
+logs/
+
+# 音乐引擎 ACE-Step（第三方仓库 + 模型体积大，不入库；获取方式见 README）
+ace-step/
+
+# 前端构建
+frontend/dist/
+
+# 前端构建产物（源码在 frontend/，部署时重新构建）
+backend/app/static/
+
+# 部署本地配置（含云资源 ID，不入库）
+.vefaas/
+
+# 系统
+.DS_Store
+__pycache__/
+*.pyc
+.pytest_cache/
