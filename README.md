@@ -1,6 +1,6 @@
-# 复古音乐工作站（产品名待定）
+# 复古音乐工作站
 
-类 Suno 的 AI 音乐生成 Web 产品，界面为「80 年代复古 Windows 桌面」风格。
+AI 音乐生成 Web 产品，界面为「80 年代复古 Windows 桌面」风格。
 音乐引擎使用开源模型 **ACE-Step 1.5**（MIT，本机 Apple Silicon 走 MLX 运行），开发期可用 mock 兜底。
 
 ## 目录
