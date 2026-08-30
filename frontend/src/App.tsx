@@ -16,7 +16,7 @@ interface AppDef {
   icon: string;
   kind: string;
   w: number;
-  h: number;
+  h: number | 'auto';
 }
 
 interface WinState {
@@ -27,7 +27,7 @@ interface WinState {
 }
 
 const APPS: AppDef[] = [
-  { id: 'composer', title: '创作台', icon: '🎵', kind: 'composer', w: 580, h: 560 },
+  { id: 'composer', title: '创作台', icon: '🎵', kind: 'composer', w: 580, h: 'auto' },
   { id: 'history', title: '历史', icon: '📼', kind: 'history', w: 620, h: 480 },
   { id: 'trash', title: '回收站', icon: '🗑️', kind: 'trash', w: 520, h: 360 },
   { id: 'idea', title: '灵感', icon: '💡', kind: 'soon', w: 380, h: 240 },
