@@ -40,7 +40,7 @@ export default function HistoryWindow({ jobs, onPlay, onDelete, currentId, isPla
               <button className="btn95 !px-2" onClick={() => onPlay(j)}>
                 {currentId === j.id && isPlaying ? '⏸' : '▶'}
               </button>
-              <a className="btn95 !px-2 !no-underline" href={api.downloadUrl(j.id)}>⬇</a>
+              <a className="btn95 !px-2 !no-underline" href={api.downloadUrl(j.id)} title="下载到本地" aria-label="下载到本地">⬇ 下载</a>
             </>
           )}
           <button className="btn95 !px-2" onClick={() => onDelete(j.id)}>🗑</button>

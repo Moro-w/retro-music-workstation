@@ -7,7 +7,7 @@ interface Props {
   y: number;
   zIndex: number;
   width: number;
-  height: number;
+  height: number | 'auto';
   active: boolean;
   onFocus: () => void;
   onClose: () => void;

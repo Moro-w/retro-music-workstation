@@ -1,50 +1,51 @@
 export default function Landing({ onEnter }: { onEnter: () => void }) {
   return (
-    <div className="landing">
-      <div className="landing-grid" />
-      <div className="landing-inner">
-        <div className="landing-badge">AI MUSIC GENERATOR · 纯音乐</div>
+    <main className="landing landing-classic">
+      <div className="landing-classic-grid" aria-hidden="true" />
 
-        <h1 className="landing-title">
-          RETRO<span className="landing-title-accent">MUSIC</span>
+      <section className="landing-classic-inner" aria-labelledby="landing-title">
+        <div className="landing-classic-badge">AI MUSIC GENERATOR</div>
+
+        <h1 id="landing-title" className="landing-classic-title">
+          RETRO<span>MUSIC</span>
         </h1>
-        <p className="landing-sub">
-          在 80 年代复古桌面里，<br />
-          用一句话生成你的专属纯音乐
+
+        <p className="landing-classic-subtitle">
+          在 80 年代复古桌面里，
+          <br />
+          用一句话生成你的专属音乐
         </p>
 
-        <div className="landing-features">
-          <div className="landing-feature">
-            <span className="landing-feature-icon">🎵</span>
+        <div className="landing-classic-features">
+          <article className="landing-classic-feature">
+            <span className="landing-classic-icon" aria-hidden="true">🎵</span>
             <div>
-              <div className="landing-feature-title">AI 音乐生成</div>
-              <div className="landing-feature-desc">描述画面与情绪，秒出 44.1kHz 立体声</div>
+              <h2>AI 音乐生成</h2>
+              <p>描述画面与情绪，秒出<br />44.1kHz 立体声</p>
             </div>
-          </div>
-          <div className="landing-feature">
-            <span className="landing-feature-icon">🖥️</span>
+          </article>
+
+          <article className="landing-classic-feature">
+            <span className="landing-classic-icon" aria-hidden="true">🖥️</span>
             <div>
-              <div className="landing-feature-title">复古桌面体验</div>
-              <div className="landing-feature-desc">Windows 95 风格窗口，双击图标开工</div>
+              <h2>复古桌面体验</h2>
+              <p>Windows 95 风格窗口，双击图标开工</p>
             </div>
-          </div>
-          <div className="landing-feature">
-            <span className="landing-feature-icon">📼</span>
+          </article>
+
+          <article className="landing-classic-feature">
+            <span className="landing-classic-icon" aria-hidden="true">📼</span>
             <div>
-              <div className="landing-feature-title">历史与回收站</div>
-              <div className="landing-feature-desc">生成记录可播放、下载、还原</div>
+              <h2>历史与回收站</h2>
+              <p>生成记录可播放、下载、还原</p>
             </div>
-          </div>
+          </article>
         </div>
 
-        <button className="landing-cta" onClick={onEnter}>
-          进入创作台 <span className="landing-cta-blink">▮</span>
+        <button className="landing-classic-cta" onClick={onEnter}>
+          进入创作台 <span aria-hidden="true">▎</span>
         </button>
-
-        <div className="landing-foot">
-          Powered by fal.ai · CassetteAI — 本地运行 · 按次付费
-        </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

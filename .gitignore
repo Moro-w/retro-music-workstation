@@ -31,3 +31,6 @@ backend/app/static/
 __pycache__/
 *.pyc
 .pytest_cache/
+
+# 编辑器
+.vscode/

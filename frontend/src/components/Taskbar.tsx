@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { Job } from '../api';
+import { api, type Job } from '../api';
 
 interface Props {
   apps: { id: string; title: string; icon: string }[];
@@ -96,6 +96,15 @@ export default function Taskbar({
           value={time.current}
           onChange={(e) => onSeek(Number(e.target.value))}
         />
+        <a
+          className="btn95 !px-2 !py-0.5 !no-underline"
+          href={currentTrack ? api.downloadUrl(currentTrack.id) : undefined}
+          title="下载到本地"
+          aria-label="下载到本地"
+          onClick={(e) => { if (!currentTrack) e.preventDefault(); }}
+        >
+          ⬇
+        </a>
       </div>
 
       <div className="border-2 border-l-[#808080] border-t-[#808080] border-r-white border-b-white px-2 py-0.5 text-sm whitespace-nowrap">

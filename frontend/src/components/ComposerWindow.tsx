@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { api, type GeneratePayload } from '../api';
 
 interface Props {
@@ -11,7 +11,8 @@ export default function ComposerWindow({ onGenerate, generating, progress }: Pro
   const [prompt, setPrompt] = useState('');
   const [tags, setTags] = useState('');
   const [busy, setBusy] = useState(false);
-  const [mockMode, setMockMode] = useState(false); // 默认真实生成（fal.ai）
+  const [confirming, setConfirming] = useState(false);
+  const confirmTimer = useRef<number | null>(null);
 
   const enhance = async () => {
     if (!prompt) return;
@@ -32,10 +33,19 @@ export default function ComposerWindow({ onGenerate, generating, progress }: Pro
       alert('请先填写音乐描述');
       return;
     }
+    if (!confirming) {
+      // 第一次点击：进入确认态，几秒内再点才真正生成（防误触）
+      setConfirming(true);
+      if (confirmTimer.current) window.clearTimeout(confirmTimer.current);
+      confirmTimer.current = window.setTimeout(() => setConfirming(false), 3000);
+      return;
+    }
+    // 二次点击：真正提交
+    setConfirming(false);
+    if (confirmTimer.current) window.clearTimeout(confirmTimer.current);
     onGenerate({
       prompt: prompt.trim(),
       tags: tags.trim() || undefined,
-      mock: mockMode,
     });
   };
 
@@ -58,15 +68,12 @@ export default function ComposerWindow({ onGenerate, generating, progress }: Pro
           onChange={(e) => setTags(e.target.value)} disabled={generating} />
       </div>
 
-      <label className="flex items-center gap-2 text-sm cursor-pointer select-none">
-        <input type="checkbox" checked={mockMode} onChange={(e) => setMockMode(e.target.checked)} className="w-4 h-4" disabled={generating} />
-        <span className={mockMode ? '' : 'font-bold text-red-600'}>
-          {mockMode ? '免费测试模式（合成音频，不扣费）' : '真实生成（fal.ai 按次扣费）'}
-        </span>
-      </label>
-
-      <button className="btn95 !font-bold !text-base !py-2" onClick={submit} disabled={generating}>
-        {generating ? '生成中…' : mockMode ? '🎵 生成音乐（免费测试）' : '🎵 生成音乐（真实付费）'}
+      <button
+        className={`btn95 !font-bold !text-base !py-2 ${confirming ? 'btn95-confirm' : ''}`}
+        onClick={submit}
+        disabled={generating}
+      >
+        {generating ? '生成中…' : confirming ? '⚠ 再点一次确认生成' : '🎵 生成音乐'}
       </button>
 
       {generating && (
