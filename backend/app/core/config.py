@@ -17,6 +17,8 @@ def _env(name: str, default: str = "") -> str:
 ENV = _env("ENV", "dev")  # dev | prod
 # 邀请码（逗号分隔）；非空时开启登录鉴权
 INVITE_CODES = _env("INVITE_CODES", "")
+# 登录 token 签名密钥（可选）；不设置则用 INVITE_CODES 派生，二者任一稳定即可
+INVITE_SECRET = _env("INVITE_SECRET", "")
 
 # 数据库与资产
 DATABASE_URL = _env("DATABASE_URL", f"sqlite:///{PROJECT_DIR / 'data' / 'app.db'}")

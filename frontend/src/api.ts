@@ -62,6 +62,8 @@ export const api = {
 
   authStatus: () => request<{ auth_required: boolean }>('/api/v1/auth/status'),
 
+  verify: () => request<{ valid: boolean; user: string | null }>('/api/v1/auth/verify'),
+
   login: (code: string) =>
     request<{ token: string; user: string }>('/api/v1/auth/login', {
       method: 'POST',

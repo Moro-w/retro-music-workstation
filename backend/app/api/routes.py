@@ -81,6 +81,14 @@ def login(body: dict):
     return {"token": issue_token(user), "user": user}
 
 
+@public.get("/auth/verify")
+def auth_verify(authorization: str = Header(default=""), token: str = Query(default="")):
+    """校验已存 token 是否有效；无效时前端应清除本地 token 并回到登录页。"""
+    t = (authorization or "").replace("Bearer ", "").strip() or (token or "").strip()
+    user = resolve_token(t)
+    return {"valid": user is not None, "user": user}
+
+
 # ===== 需登录接口 =====
 
 @router.post("/music/generate")

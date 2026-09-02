@@ -66,16 +66,44 @@ export default function App() {
 
   useEffect(() => { if (authed) refresh(); }, [authed, refresh]);
 
-  // 鉴权检查：线上要求邀请码登录；本地开发（未开邀请码）直接放行
+  // 鉴权检查：线上要求邀请码登录；本地开发（未开邀请码）直接放行。
+  // 存了 token 也会先向 /auth/verify 校验有效性，无效则清除并回到登录页。
   useEffect(() => {
     let cancel = false;
-    api.authStatus()
-      .then((s) => {
+    (async () => {
+      try {
+        const s = await api.authStatus();
         if (cancel) return;
-        setAuthed(!s.auth_required || !!getToken());
-      })
-      .catch(() => { if (!cancel) setAuthed(false); })
-      .finally(() => { if (!cancel) setAuthChecking(false); });
+        if (!s.auth_required) {
+          setAuthed(true);
+          return;
+        }
+        const tok = getToken();
+        if (!tok) {
+          setAuthed(false);
+          return;
+        }
+        try {
+          const v = await api.verify();
+          if (cancel) return;
+          if (v.valid) {
+            setAuthed(true);
+          } else {
+            api.setToken(null);
+            setAuthed(false);
+          }
+        } catch {
+          if (!cancel) {
+            api.setToken(null);
+            setAuthed(false);
+          }
+        }
+      } catch {
+        if (!cancel) setAuthed(false);
+      } finally {
+        if (!cancel) setAuthChecking(false);
+      }
+    })();
     return () => { cancel = true; };
   }, []);
 
