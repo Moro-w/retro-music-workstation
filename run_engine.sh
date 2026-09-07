@@ -5,7 +5,7 @@ cd "$(dirname "$0")/ace-step" || exit 1
 # 国内加速：Python 包走清华源
 export UV_DEFAULT_INDEX="${UV_DEFAULT_INDEX:-https://pypi.tuna.tsinghua.edu.cn/simple}"
 # 指定 Python 3.11
-export UV_PYTHON="${UV_PYTHON:-/Users/moro/.local/bin/python3.11}"
+export UV_PYTHON="${UV_PYTHON:-3.11}"
 # MLX 后端（Apple Silicon 加速）
 export ACESTEP_LM_BACKEND=mlx
 
